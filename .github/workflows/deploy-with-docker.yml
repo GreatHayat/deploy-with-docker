@@ -48,4 +48,5 @@ jobs:
           port: ${{ secrets.HOST_SSH_PORT }}
 
           script: |
-            docker pull djangodeveloper/deploy-with-docker:master
+            docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_PASSWORD }}
+            docker pull ${{ secrets.DOCKER_REGISTRY_NAMESPACE }}/${{ secrets.DOCKER_REPOSITORY }}:master
