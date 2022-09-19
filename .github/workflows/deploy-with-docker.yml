@@ -48,4 +48,4 @@ jobs:
           port: ${{ secrets.HOST_SSH_PORT }}
 
           script: |
-            docker pull djangodeveloper/deploy-with-docker:v1
+            docker pull djangodeveloper/deploy-with-docker:master
