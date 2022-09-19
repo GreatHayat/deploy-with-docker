@@ -32,3 +32,20 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    needs: [push_to_docker_hub_registry]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Deploy To DigitalOcean Server"
+        uses: appleboy/ssh-action@master
+
+        with:
+          host: ${{ secrets.HOST_IP_ADDRESS }}
+          username: ${{ secrets.HOST_USERNAME }}
+          key: ${{ secrets.HOST_SSH_KEY }}
+          port: ${{ secrets.HOST_SSH_PORT }}
+
+          script: |
+            docker pull djangodeveloper/deploy-with-docker:v1
